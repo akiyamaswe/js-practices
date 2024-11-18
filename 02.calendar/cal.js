@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import dayjs from "dayjs";
+import minimist from "minimist";
 
 const CALENDAR_CONFIG = {
   MONTH: {
@@ -38,15 +39,21 @@ const formatCalendar = (year, month) => {
   return `${header}\n${calendar}`;
 };
 
-const main = () => {
-  const [yearArg, monthArg] = process.argv.slice(2);
+const parseArgs = () => {
   const now = dayjs();
+  const argv = minimist(process.argv.slice(2), {
+    alias: {
+      y: "year",
+      m: "month",
+    },
+  });
 
-  const year = parseInt(yearArg) || now.year();
+  const year = argv.year || argv._[0] || now.year();
   const month =
-    parseInt(monthArg) || now.month() + CALENDAR_CONFIG.MONTH.OFFSET;
+    argv.month || argv._[1] || now.month() + CALENDAR_CONFIG.MONTH.OFFSET;
 
-  console.log(formatCalendar(year, month));
+  return { year, month };
 };
 
-main();
+const { year, month } = parseArgs();
+console.log(formatCalendar(year, month));
