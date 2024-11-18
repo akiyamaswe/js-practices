@@ -3,16 +3,10 @@
 import dayjs from "dayjs";
 import minimist from "minimist";
 
-const CALENDAR_CONFIG = {
-  MONTH: {
-    OFFSET: 1,
-  },
-  WEEK: {
-    SATURDAY: 6,
-  },
-  FORMAT: {
-    DATE_WIDTH: 2,
-  },
+const CALENDAR = {
+  SATURDAY: 6,
+  DATE_WIDTH: 2,
+  MONTH_OFFSET: 1,
 };
 
 const formatCalendar = (year, month) => {
@@ -27,10 +21,9 @@ const formatCalendar = (year, month) => {
 
   while (currentDay.isBefore(endDate) || currentDay.isSame(endDate)) {
     calendar +=
-      currentDay.date().toString().padStart(CALENDAR_CONFIG.FORMAT.DATE_WIDTH) +
-      " ";
+      currentDay.date().toString().padStart(CALENDAR.DATE_WIDTH) + " ";
 
-    if (currentDay.day() === CALENDAR_CONFIG.WEEK.SATURDAY) {
+    if (currentDay.day() === CALENDAR.SATURDAY) {
       calendar += "\n";
     }
     currentDay = currentDay.add(1, "day");
@@ -49,8 +42,7 @@ const parseArgs = () => {
   });
 
   const year = argv.year || argv._[0] || now.year();
-  const month =
-    argv.month || argv._[1] || now.month() + CALENDAR_CONFIG.MONTH.OFFSET;
+  const month = argv.month || argv._[1] || now.month() + CALENDAR.MONTH_OFFSET;
 
   return { year, month };
 };
