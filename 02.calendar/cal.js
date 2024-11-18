@@ -9,27 +9,23 @@ const CALENDAR = {
   MONTH_OFFSET: 1,
 };
 
-const formatCalendar = (year, month) => {
-  const header = `      ${month}月  ${year}\n日 月 火 水 木 金 土`;
-  const startDate = dayjs(`${year}-${month}-01`);
-  const endDate = startDate.endOf("month");
+const generateCalendar = (year, month) => {
+  const date = dayjs(`${year}-${month}-01`);
+  const days = Array.from({ length: date.daysInMonth() }, (_, i) =>
+    date.add(i, "day"),
+  );
 
-  let calendar = "";
-  let currentDay = startDate;
-
-  calendar += "   ".repeat(startDate.day());
-
-  while (currentDay.isBefore(endDate) || currentDay.isSame(endDate)) {
-    calendar +=
-      currentDay.date().toString().padStart(CALENDAR.DATE_WIDTH) + " ";
-
-    if (currentDay.day() === CALENDAR.SATURDAY) {
+  let calendar = "   ".repeat(date.day());
+  days.forEach((d) => {
+    calendar += d.date().toString().padStart(CALENDAR.DATE_WIDTH) + " ";
+    if (d.day() === CALENDAR.SATURDAY) {
       calendar += "\n";
     }
-    currentDay = currentDay.add(1, "day");
-  }
+  });
 
-  return `${header}\n${calendar}`;
+  return [`      ${month}月  ${year}`, "日 月 火 水 木 金 土", calendar].join(
+    "\n",
+  );
 };
 
 const parseArgs = () => {
@@ -48,4 +44,4 @@ const parseArgs = () => {
 };
 
 const { year, month } = parseArgs();
-console.log(formatCalendar(year, month));
+console.log(generateCalendar(year, month));
