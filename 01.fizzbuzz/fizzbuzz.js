@@ -22,5 +22,5 @@ const convertToFizzBuzz = (count) =>
   CONFIG.rules.find((rule) => rule.condition(count))?.output ||
   count.toString();
 
-const range = [...Array(CONFIG.maxNumber)].map((_, index) => index + 1);
-range.forEach((count) => console.log(convertToFizzBuzz(count)));
+const numbers = [...Array(CONFIG.maxNumber)].map((_, index) => index + 1);
+numbers.forEach((count) => console.log(convertToFizzBuzz(count)));
