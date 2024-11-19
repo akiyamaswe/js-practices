@@ -22,4 +22,6 @@ const convertToFizzBuzz = (number) =>
   number.toString();
 
 const numbers = [...Array(maxNumber)].map((_, index) => index + 1);
-numbers.forEach((number) => console.log(convertToFizzBuzz(number)));
+numbers.forEach((number) => {
+  console.log(convertToFizzBuzz(number));
+});
