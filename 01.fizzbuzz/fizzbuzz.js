@@ -18,9 +18,9 @@ const CONFIG = {
   ],
 };
 
-const convertToFizzBuzz = (count) =>
-  CONFIG.rules.find((rule) => rule.condition(count))?.output ||
-  count.toString();
+const convertToFizzBuzz = (number) =>
+  CONFIG.rules.find((rule) => rule.condition(number))?.output ||
+  number.toString();
 
 const numbers = [...Array(CONFIG.maxNumber)].map((_, index) => index + 1);
-numbers.forEach((count) => console.log(convertToFizzBuzz(count)));
+numbers.forEach((number) => console.log(convertToFizzBuzz(number)));
