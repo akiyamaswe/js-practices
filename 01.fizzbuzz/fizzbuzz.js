@@ -18,7 +18,7 @@ const fizzBuzzRules = [
 ];
 
 const convertToFizzBuzz = (number) =>
-  fizzBuzzRules.find((rule) => rule.condition(number))?.output ||
+  fizzBuzzRules.find((rule) => rule.condition(number))?.output ??
   number.toString();
 
 const numbers = [...Array(maxNumber)].map((_, index) => index + 1);
