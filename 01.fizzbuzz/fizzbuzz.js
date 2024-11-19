@@ -3,14 +3,23 @@
 const CONFIG = {
   maxNumber: 20,
   rules: [
-    { divisor: 15, output: "FizzBuzz" },
-    { divisor: 3, output: "Fizz" },
-    { divisor: 5, output: "Buzz" },
+    {
+      condition: (num) => num % 3 === 0 && num % 5 === 0,
+      output: "FizzBuzz",
+    },
+    {
+      condition: (num) => num % 3 === 0,
+      output: "Fizz",
+    },
+    {
+      condition: (num) => num % 5 === 0,
+      output: "Buzz",
+    },
   ],
 };
 
 const convertToFizzBuzz = (count) =>
-  CONFIG.rules.find((rule) => count % rule.divisor === 0)?.output ||
+  CONFIG.rules.find((rule) => rule.condition(count))?.output ||
   count.toString();
 
 const range = [...Array(CONFIG.maxNumber)].map((_, index) => index + 1);
