@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const maxNumber = 20;
+const MAX_NUMBER = 20;
 
 const convertToFizzBuzz = (number) => {
   let result = "";
@@ -9,7 +9,7 @@ const convertToFizzBuzz = (number) => {
   return result || number.toString();
 };
 
-const numbers = [...Array(maxNumber)].map((_, index) => index + 1);
+const numbers = [...Array(MAX_NUMBER)].map((_, index) => index + 1);
 numbers.forEach((number) => {
   console.log(convertToFizzBuzz(number));
 });
