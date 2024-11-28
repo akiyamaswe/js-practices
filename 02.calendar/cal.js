@@ -42,8 +42,8 @@ const parseArgs = () => {
     },
   });
 
-  const year = argv.year || argv._[0] || now.year();
-  const month = argv.month || argv._[1] || now.month() + CALENDAR.MONTH_OFFSET;
+  const year = argv.year ?? argv._[0] ?? now.year();
+  const month = argv.month ?? argv._[1] ?? now.month() + CALENDAR.MONTH_OFFSET;
 
   return { year, month };
 };
