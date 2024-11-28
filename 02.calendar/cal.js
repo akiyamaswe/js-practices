@@ -10,12 +10,12 @@ const CALENDAR = {
 };
 
 const generateCalendar = (year, month) => {
-  const date = dayjs(`${year}-${month}-01`);
-  const days = Array.from({ length: date.daysInMonth() }, (_, i) =>
-    date.add(i, "day"),
+  const firstDayOfMonth = dayjs(`${year}-${month}-01`);
+  const days = Array.from({ length: firstDayOfMonth.daysInMonth() }, (_, i) =>
+    firstDayOfMonth.add(i, "day"),
   );
 
-  let calendar = "   ".repeat(date.day());
+  let calendar = "   ".repeat(firstDayOfMonth.day());
   days.forEach((d, index) => {
     calendar += d.date().toString().padStart(CALENDAR.DATE_WIDTH);
     if (index < days.length - 1) {
