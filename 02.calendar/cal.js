@@ -17,9 +17,13 @@ const generateCalendar = (year, month) => {
 
   let calendar = "   ".repeat(date.day());
   days.forEach((d, index) => {
-    calendar += d.date().toString().padStart(CALENDAR.DATE_WIDTH) + " ";
-    if (d.day() === CALENDAR.SATURDAY && index < days.length - 1) {
-      calendar += "\n";
+    calendar += d.date().toString().padStart(CALENDAR.DATE_WIDTH);
+    if (index < days.length - 1) {
+      if (d.day() === CALENDAR.SATURDAY) {
+        calendar += "\n";
+      } else {
+        calendar += " ";
+      }
     }
   });
 
