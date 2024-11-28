@@ -17,10 +17,10 @@ const generateCalendar = (year, month) => {
   );
 
   let calendar = "   ".repeat(firstDayOfMonth.day());
-  datesInMonth.forEach((date, index) => {
-    calendar += date.date().toString().padStart(CALENDAR.DATE_WIDTH);
+  datesInMonth.forEach((currentDate, index) => {
+    calendar += currentDate.date().toString().padStart(CALENDAR.DATE_WIDTH);
     if (index < datesInMonth.length - 1) {
-      if (date.day() === CALENDAR.SATURDAY) {
+      if (currentDate.day() === CALENDAR.SATURDAY) {
         calendar += "\n";
       } else {
         calendar += " ";
