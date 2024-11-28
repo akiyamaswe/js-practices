@@ -9,6 +9,22 @@ const CALENDAR_CONFIG = {
   MONTH_OFFSET: 1,
 };
 
+const parseArgs = () => {
+  const now = dayjs();
+  const argv = minimist(process.argv.slice(2), {
+    alias: {
+      y: "year",
+      m: "month",
+    },
+  });
+
+  const year = argv.year ?? argv._[0] ?? now.year();
+  const month =
+    argv.month ?? argv._[1] ?? now.month() + CALENDAR_CONFIG.MONTH_OFFSET;
+
+  return { year, month };
+};
+
 const generateCalendar = (year, month) => {
   const firstDayOfMonth = dayjs(`${year}-${month}-01`);
   const datesInMonth = Array.from(
@@ -35,22 +51,6 @@ const generateCalendar = (year, month) => {
   const weekdayLabels = "日 月 火 水 木 金 土";
 
   return [headerText, weekdayLabels, dateRaws].join("\n");
-};
-
-const parseArgs = () => {
-  const now = dayjs();
-  const argv = minimist(process.argv.slice(2), {
-    alias: {
-      y: "year",
-      m: "month",
-    },
-  });
-
-  const year = argv.year ?? argv._[0] ?? now.year();
-  const month =
-    argv.month ?? argv._[1] ?? now.month() + CALENDAR_CONFIG.MONTH_OFFSET;
-
-  return { year, month };
 };
 
 const { year, month } = parseArgs();
