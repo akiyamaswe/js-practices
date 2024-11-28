@@ -11,15 +11,16 @@ const CALENDAR = {
 
 const generateCalendar = (year, month) => {
   const firstDayOfMonth = dayjs(`${year}-${month}-01`);
-  const days = Array.from({ length: firstDayOfMonth.daysInMonth() }, (_, i) =>
-    firstDayOfMonth.add(i, "day"),
+  const datesInMonth = Array.from(
+    { length: firstDayOfMonth.daysInMonth() },
+    (_, i) => firstDayOfMonth.add(i, "day"),
   );
 
   let calendar = "   ".repeat(firstDayOfMonth.day());
-  days.forEach((d, index) => {
-    calendar += d.date().toString().padStart(CALENDAR.DATE_WIDTH);
-    if (index < days.length - 1) {
-      if (d.day() === CALENDAR.SATURDAY) {
+  datesInMonth.forEach((date, index) => {
+    calendar += date.date().toString().padStart(CALENDAR.DATE_WIDTH);
+    if (index < datesInMonth.length - 1) {
+      if (date.day() === CALENDAR.SATURDAY) {
         calendar += "\n";
       } else {
         calendar += " ";
