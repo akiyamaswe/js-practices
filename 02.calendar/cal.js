@@ -3,7 +3,7 @@
 import dayjs from "dayjs";
 import minimist from "minimist";
 
-const CALENDAR = {
+const CALENDAR_CONFIG = {
   SATURDAY: 6,
   DATE_WIDTH: 2,
   MONTH_OFFSET: 1,
@@ -18,9 +18,12 @@ const generateCalendar = (year, month) => {
 
   let dateRaws = "   ".repeat(firstDayOfMonth.day());
   datesInMonth.forEach((currentDate, index) => {
-    dateRaws += currentDate.date().toString().padStart(CALENDAR.DATE_WIDTH);
+    dateRaws += currentDate
+      .date()
+      .toString()
+      .padStart(CALENDAR_CONFIG.DATE_WIDTH);
     if (index < datesInMonth.length - 1) {
-      if (currentDate.day() === CALENDAR.SATURDAY) {
+      if (currentDate.day() === CALENDAR_CONFIG.SATURDAY) {
         dateRaws += "\n";
       } else {
         dateRaws += " ";
@@ -44,7 +47,8 @@ const parseArgs = () => {
   });
 
   const year = argv.year ?? argv._[0] ?? now.year();
-  const month = argv.month ?? argv._[1] ?? now.month() + CALENDAR.MONTH_OFFSET;
+  const month =
+    argv.month ?? argv._[1] ?? now.month() + CALENDAR_CONFIG.MONTH_OFFSET;
 
   return { year, month };
 };
