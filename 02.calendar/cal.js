@@ -16,14 +16,14 @@ const generateCalendar = (year, month) => {
     (_, i) => firstDayOfMonth.add(i, "day"),
   );
 
-  let calendar = "   ".repeat(firstDayOfMonth.day());
+  let dateRaws = "   ".repeat(firstDayOfMonth.day());
   datesInMonth.forEach((currentDate, index) => {
-    calendar += currentDate.date().toString().padStart(CALENDAR.DATE_WIDTH);
+    dateRaws += currentDate.date().toString().padStart(CALENDAR.DATE_WIDTH);
     if (index < datesInMonth.length - 1) {
       if (currentDate.day() === CALENDAR.SATURDAY) {
-        calendar += "\n";
+        dateRaws += "\n";
       } else {
-        calendar += " ";
+        dateRaws += " ";
       }
     }
   });
@@ -31,7 +31,7 @@ const generateCalendar = (year, month) => {
   const headerText = `      ${month}月 ${year}`;
   const weekdayLabels = "日 月 火 水 木 金 土";
 
-  return [headerText, weekdayLabels, calendar].join("\n");
+  return [headerText, weekdayLabels, dateRaws].join("\n");
 };
 
 const parseArgs = () => {
