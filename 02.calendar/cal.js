@@ -27,9 +27,10 @@ const generateCalendar = (year, month) => {
     }
   });
 
-  return [`      ${month}月 ${year}`, "日 月 火 水 木 金 土", calendar].join(
-    "\n",
-  );
+  const headerText = `      ${month}月 ${year}`;
+  const weekdayLabels = "日 月 火 水 木 金 土";
+
+  return [headerText, weekdayLabels, calendar].join("\n");
 };
 
 const parseArgs = () => {
