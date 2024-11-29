@@ -12,7 +12,12 @@ const convertToFizzBuzz = (number) => {
   if (number % 5 === 0) {
     result += "Buzz";
   }
-  return result || number.toString();
+
+  if (result === "") {
+    result = number.toString();
+  }
+
+  return result;
 };
 
 const numbers = [...Array(MAX_NUMBER)].map((_, index) => index + 1);
